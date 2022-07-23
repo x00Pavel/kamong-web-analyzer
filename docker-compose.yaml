@@ -1,0 +1,27 @@
+version: "3.9"
+services:
+  flask:
+    build:
+      context: .
+      dockerfile: Dockerfile-flask
+    container_name: flask
+    ports:
+      - "8008:8008"
+    volumes:
+      - .:/app
+  user1:
+    build:
+      context: .
+      dockerfile: Dockerfile-user
+    container_name: user1
+  user2:
+    build:
+      context: .
+      dockerfile: Dockerfile-user
+    container_name: user2
+  user3:
+    build:
+      context: .
+      dockerfile: Dockerfile-user
+    container_name: user3
+

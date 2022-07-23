@@ -1,0 +1,7 @@
+FROM ubuntu
+EXPOSE 80
+RUN apt update
+RUN apt install python3 python3-pip iproute2 -y 
+RUN python3 -m pip install -r /app/requirements.txt
+WORKDIR /app
+ENTRYPOINT ["python3", "web/app.py"]

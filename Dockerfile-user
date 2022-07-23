@@ -1,0 +1,7 @@
+FROM ubuntu
+
+RUN apt update
+RUN apt install curl -y
+COPY script.sh /tmp/script.sh 
+
+ENTRYPOINT ["/bin/bash", "/tmp/script.sh"]
