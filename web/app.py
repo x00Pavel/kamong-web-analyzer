@@ -18,8 +18,11 @@ KAFKA_PORT = getenv("KAFKA_PORT")
 assert KAFKA_BOOTSTRAP_SERVER_NAME is not None
 assert KAFKA_PORT is not None
 
-TOPIC_NAME = "quickstart"
+TOPIC_NAME = getenv("TOPIC_NAME")
 KAFKA_SERVER = f"{KAFKA_BOOTSTRAP_SERVER_NAME}:{KAFKA_PORT}"
+
+app.logger.debug(f"Kafka topic: {TOPIC_NAME}")
+app.logger.debug(f"Kafka bootstrap server: {KAFKA_SERVER}")
 
 producer = KafkaProducer(
     bootstrap_servers = KAFKA_SERVER,
@@ -31,20 +34,16 @@ class Hello(Resource):
 
     def get(self):
         
-        print(request.json)
         data = {
             "server_ip": request.host,
             "ip": request.remote_addr,
             "ts": time.time()}
         json_paylaod = json.dumps(data)
         
-        print("Sending to Kafka")
-
         producer.send(TOPIC_NAME, json_paylaod.encode("utf-8"))
         producer.flush()
 
-        print("Sent to consumer")
-        print(json_paylaod)
+        app.logger.debug(f"Parsed data to kafka: {json_paylaod}")
 
         return jsonify(data)
 
