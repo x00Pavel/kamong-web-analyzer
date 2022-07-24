@@ -15,10 +15,19 @@ jobs:
           python-version: 3.9
         
       - name: Install packages
-        run: sudo apt-get install podman -y
+        run: sudo apt-get install podman curl -y
 
       - name: Install podman-compose
         run: python3 -m pip install podman-compose
       
       - name: Deploy all containers
         run: podman-compose up -d --build
+
+      - name: Setup Kafka MongoDb connector
+        run: docker exec shell bash /initialize-container.sh 
+
+      - name: Test curl to the Flask app from localhost
+        run: curl http://localhost:8008
+
+      - name: Stop all containers
+        run: podman-compose down
