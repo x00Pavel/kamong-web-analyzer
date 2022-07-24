@@ -55,7 +55,6 @@ services:
       dockerfile: Dockerfile-connector
     environment:
       CONNECT_BOOTSTRAP_SERVERS: "broker:29092"
-      # CONNECT_ZOOKEEPER_CONNECT: 'zookeeper:2181'
       CONNECT_REST_PORT: 8083
       CONNECT_REST_ADVERTISED_HOST_NAME: "kafka-connect"
       CONNECT_GROUP_ID: "kafka-connect-cluster"

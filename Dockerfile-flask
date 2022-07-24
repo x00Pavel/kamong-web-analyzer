@@ -1,11 +1,11 @@
 FROM ubuntu:latest
 
-COPY requirements.txt /app
+RUN mkdir /app -p
+COPY requirements.txt /app/requirements.txt
 
 EXPOSE 8008
 RUN apt-get update
 RUN apt-get install python3 python3-pip iproute2 -y
-RUN mkdir /app 
 RUN python3 -m pip install -r /app/requirements.txt
 WORKDIR /app
 ENTRYPOINT ["python3", "web/app.py"]
