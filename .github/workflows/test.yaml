@@ -1,0 +1,17 @@
+name: Test workflow
+
+on:
+  push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install packages
+        run: apt-get install podman python3 python3-pip -y
+
+      - name: Install podman-compose
+        run: python3 -m pip install podman-compose
+      
+      - name: Deploy all containers
+        run: podman-compose up -d --build
