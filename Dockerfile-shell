@@ -9,7 +9,6 @@ RUN apt-get install -y kafkacat curl
 RUN curl https://downloads.mongodb.com/compass/mongodb-mongosh_1.0.0_amd64.deb -o mongosh.deb && \
     dpkg --install mongosh.deb
 
-RUN bash /initialize-container.sh
 # Modify command prompt
 RUN echo 'PS1="\[\e[32m\][\e[mMongoDB Kafka Connector\e[32m]\e[m : "' >> ~/.bashrc
 
